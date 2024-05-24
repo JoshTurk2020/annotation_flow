@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Flow Chart</title>
+  <style>
+    /* CSS styles for the flow chart elements */
+    .chart {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .step {
+      padding: 10px;
+      margin: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    /* Add more styles for a modern and appealing look */
+  </style>
+</head>
+<body>
+  <div class="chart">
+    <div class="step" id="annotation-process">THE ANNOTATION PROCESS</div>
+    <div class="step" id="search-texts">Search texts for possible questions</div>
+    <div class="step" id="create-questions">Create Questions</div>
+    <div class="step" id="provide-evidence">Provide Evidence Strings for Answer</div>
+    <div class="step" id="use-evidence">Use evidence to create coherent answer</div>
+    <div class="step" id="add-info">Did you add information in your answer not found in evidence strings?</div>
+    <div class="step" id="apply-style">APPLY STYLE GUIDE(S)</div>
+    <div class="step" id="check-spelling">CHECK FOR SPELLING AND TYPOS</div>
+    <div class="step" id="done">YOU'RE DONE!</div>
+  </div>
+
+  <div id="details"></div>
+
+  <script>
+    // JavaScript code for interactivity
+    const steps = document.querySelectorAll('.step');
+    const details = document.getElementById('details');
+
+    steps.forEach(step => {
+      step.addEventListener('click', () => {
+        const stepId = step.id;
+        // Display detailed instructions based on the clicked step
+        switch (stepId) {
+          case 'annotation-process':
+            details.textContent = 'Detailed instructions for the annotation process...';
+            break;
+          case 'search-texts':
+            details.textContent = 'Detailed instructions for searching texts...';
+            break;
+          // Add more cases for each step
+          default:
+            details.textContent = '';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
