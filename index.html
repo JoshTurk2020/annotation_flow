@@ -14,7 +14,34 @@
     .step {
       padding: 10px;
       margin: 10px;
+      border: 1px solid #ccc;
       border-radius: 5px;
+      cursor: pointer;
+      background-color: #f2f2f2;
+    }
+    .dialog {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+    .dialog-content {
+      background-color: #fefefe;
+      margin: 15% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+    }
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
       cursor: pointer;
     }
     /* Add more styles for a modern and appealing look */
@@ -26,36 +53,69 @@
     <div class="step" id="search-texts">Search texts for possible questions</div>
     <div class="step" id="create-questions">Create Questions</div>
     <div class="step" id="provide-evidence">Provide Evidence Strings for Answer</div>
-    <div class="step" id="use-evidence">Use evidence to create coherent answer</div>
-    <div class="step" id="add-info">Did you add information in your answer not found in evidence strings?</div>
+    <div>
+      <div class="step" id="use-evidence">Use evidence to create coherent answer</div>
+      <div>
+        <span>Did you add information in your answer not found in evidence strings?</span>
+        <div>
+          <span>YES</span>
+          <span>NO</span>
+        </div>
+      </div>
+    </div>
     <div class="step" id="apply-style">APPLY STYLE GUIDE(S)</div>
+    <div>
+      <span>Are your answers coherent?</span>
+      <div>
+        <span>YES</span>
+        <span>NO</span>
+      </div>
+    </div>
     <div class="step" id="check-spelling">CHECK FOR SPELLING AND TYPOS</div>
     <div class="step" id="done">YOU'RE DONE!</div>
   </div>
 
-  <div id="details"></div>
+  <div id="dialog" class="dialog">
+    <div class="dialog-content">
+      <span class="close">&times;</span>
+      <p id="dialog-text"></p>
+    </div>
+  </div>
 
   <script>
     // JavaScript code for interactivity
     const steps = document.querySelectorAll('.step');
-    const details = document.getElementById('details');
+    const dialog = document.getElementById('dialog');
+    const dialogText = document.getElementById('dialog-text');
+    const closeBtn = document.querySelector('.close');
 
     steps.forEach(step => {
       step.addEventListener('click', () => {
         const stepId = step.id;
-        // Display detailed instructions based on the clicked step
+        // Display detailed instructions in the dialog box based on the clicked step
         switch (stepId) {
           case 'annotation-process':
-            details.textContent = 'Detailed instructions for the annotation process...';
+            dialogText.textContent = 'Detailed instructions for the annotation process...';
             break;
           case 'search-texts':
-            details.textContent = 'Detailed instructions for searching texts...';
+            dialogText.textContent = 'Detailed instructions for searching texts...';
             break;
           // Add more cases for each step
           default:
-            details.textContent = '';
+            dialogText.textContent = '';
         }
+        dialog.style.display = 'block';
       });
+    });
+
+    closeBtn.addEventListener('click', () => {
+      dialog.style.display = 'none';
+    });
+
+    window.addEventListener('click', (event) => {
+      if (event.target == dialog) {
+        dialog.style.display = 'none';
+      }
     });
   </script>
 </body>
